@@ -259,8 +259,8 @@ export default NewComponent;
 ### **Common Issues**
 
 **Build Errors:**
-rm -rf node_modules package-lock.json
-npm install
+rm -rf node_modules package-lock.json <br>
+npm install <br>
 npm run dev
 
 **Firebase Auth Errors:**
@@ -286,7 +286,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ![Dashboard](https://via.placeholder.com/800x400/0A192F/00FF85?text=Dashboard+View)
 
 ### **NFT Minting**
-![Mint Section](https://via.placeholder.com/800x400/0A192F/00FF85?text=Mint+Ticket+Interface)
+![Mint Section](https://via.placeholder.com/800x400/0A192F/00FF85?text=Mint+Ticket+Interface) <br>
 SOON IT WILL BE UPLOADED. 
 
 ## 🔗 Links
