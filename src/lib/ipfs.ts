@@ -1,5 +1,7 @@
-
-export function resolveIPFS(uri: string) {
-  if (!uri) return uri
-  return uri.startsWith('ipfs://') ? uri.replace('ipfs://', 'https://ipfs.io/ipfs/') : uri
+export function resolveIPFS(uri: string | undefined): string {
+  if (!uri) return "";
+  if (uri.startsWith("ipfs://")) {
+    return uri.replace("ipfs://", "https://ipfs.io/ipfs/");
+  }
+  return uri;
 }

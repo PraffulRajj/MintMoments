@@ -48,7 +48,7 @@ export function Login() {
             Welcome Back
           </h2>
           <p className="mt-2 text-sm text-gray-300">
-            Sign in to your DynamicTickets account
+            Sign in to your MintMoments account
           </p>
         </div>
 

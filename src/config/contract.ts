@@ -1,3 +1,4 @@
+// Replace with your actual contract address and ABI
 import type { Abi } from 'viem'
 
 export const CONTRACT_ADDRESS = '0xYOUR_CONTRACT_ADDRESS' // TODO: replace

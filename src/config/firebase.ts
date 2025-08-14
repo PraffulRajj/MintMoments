@@ -4,13 +4,13 @@ import { getFirestore } from 'firebase/firestore';
 
 const firebaseConfig = {
   // Replace with your Firebase config
-  apiKey: "AIzaSyCTRv5ckWTZ-egdsXdweKjNomkqTwM68TE",
-  authDomain: "ps3-dynamic-tickets.firebaseapp.com",
-  projectId: "ps3-dynamic-tickets",
-  storageBucket: "ps3-dynamic-tickets.firebasestorage.app",
-  messagingSenderId: "505141256489",
-  appId: "1:505141256489:web:127978bb022718fa69d738",
-  measurementId: "G-S8RFTPCM8G"
+  apiKey: "AIzaSyA_wWQak6vhEAqsG7HBbB8Oo3iuhWAsngQ",
+  authDomain: "ps3-dynamic-tickets-14379.firebaseapp.com",
+  projectId: "ps3-dynamic-tickets-14379",
+  storageBucket: "ps3-dynamic-tickets-14379.firebasestorage.app",
+  messagingSenderId: "827556412718",
+  appId: "1:827556412718:web:bb9ae59374227eb8244ebf",
+  measurementId: "G-MELVKB5H0Q"
 };
 
 const app = initializeApp(firebaseConfig);
