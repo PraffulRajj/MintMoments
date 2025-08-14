@@ -1,4 +1,3 @@
-
 import { useAccount, useWriteContract, useWaitForTransactionReceipt } from 'wagmi'
 import { ABI, CONTRACT_ADDRESS, CHAIN_EXPLORER } from '../config/contract'
 import { useEffect, useState } from 'react'

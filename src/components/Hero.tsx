@@ -1,4 +1,3 @@
-
 export default function Hero() {
   return (
     <section className="container pt-10">

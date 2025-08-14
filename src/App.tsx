@@ -1,21 +1,27 @@
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { AuthProvider } from './contexts/AuthContext';
+import { Login } from './pages/Login';
+import { Signup } from './pages/Signup';
+import { Dashboard } from './pages/Dashboard';
+import { ProtectedRoute } from './components/ProtectedRoute';
 
-import Navbar from './components/Navbar'
-import Hero from './components/Hero'
-import MintSection from './components/MintSection'
-import MyTicketSection from './components/MyTicketSection'
-
-export default function App() {
+function App() {
   return (
-    <div>
-      <Navbar />
-      <main className="container space-y-14 pb-16">
-        <Hero />
-        <MintSection />
-        <MyTicketSection />
-      </main>
-      <footer className="mt-8 py-10 text-center text-white/60">
-        MintMoments • PS-3 Dynamic NFT Tickets • 2025
-      </footer>
-    </div>
-  )
+    <AuthProvider>
+      <Router>
+        <Routes>
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<Signup />} />
+          <Route path="/dashboard" element={
+            <ProtectedRoute>
+              <Dashboard />
+            </ProtectedRoute>
+          } />
+          <Route path="/" element={<Navigate to="/login" />} />
+        </Routes>
+      </Router>
+    </AuthProvider>
+  );
 }
+
+export default App;
