@@ -91,7 +91,7 @@ A modern Web3 ticketing platform that transforms event passes into dynamic, veri
 
 ### **1. Clone Repository**
 
-git clone https://github.com/yourusername/ps3-dynamic-tickets.git
+git clone https://github.com/PraffulRajj/ps3-dynamic-tickets.git <br>
 cd ps3-dynamic-tickets
 
 ### **2. Install Dependencies**
