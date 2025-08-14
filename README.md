@@ -1,4 +1,4 @@
-<h1># 🎫 Dynamic NFT Tickets & Loyalty (PS-3)</H1>
+<h1>🎫 Dynamic NFT Tickets & Loyalty (PS-3)</H1>
 
 A modern Web3 ticketing platform that transforms event passes into dynamic, verifiable NFT collectibles. Built with React, Firebase Authentication, and blockchain technology for secure, fraud-resistant event management.
 
