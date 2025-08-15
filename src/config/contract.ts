@@ -1,7 +1,7 @@
 // Replace with your actual contract address and ABI
 import type { Abi } from 'viem'
 
-export const CONTRACT_ADDRESS = '0xYOUR_CONTRACT_ADDRESS' // TODO: replace
+export const CONTRACT_ADDRESS = '0xea8c4eca7b54cae19C215C8fB34684415475463f' // TODO: replace
 export const CHAIN_EXPLORER = 'https://mumbai.polygonscan.com'
 
 export const ABI: Abi = [

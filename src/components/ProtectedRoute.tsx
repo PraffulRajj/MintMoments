@@ -8,6 +8,5 @@ interface ProtectedRouteProps {
 
 export function ProtectedRoute({ children }: ProtectedRouteProps) {
   const { currentUser } = useAuth();
-  
   return currentUser ? <>{children}</> : <Navigate to="/login" />;
 }

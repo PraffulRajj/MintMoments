@@ -1,74 +1,47 @@
-import React, { createContext, useContext, useEffect, useState } from 'react';
-import { 
-  User, 
-  signInWithEmailAndPassword, 
-  createUserWithEmailAndPassword,
-  signInWithPopup,
-  signOut,
-  onAuthStateChanged
-} from 'firebase/auth';
-import { auth, googleProvider } from '../config/firebase';
+import React, { createContext, useContext, useState } from 'react';
+import axios from 'axios';
 
 interface AuthContextType {
-  currentUser: User | null;
-  login: (email: string, password: string) => Promise<void>;
-  signup: (email: string, password: string) => Promise<void>;
-  loginWithGoogle: () => Promise<void>;
-  logout: () => Promise<void>;
-  loading: boolean;
+  currentUser: { email: string } | null;
+  signup(email: string, password: string): Promise<void>;
+  login(email: string, password: string): Promise<void>;
+  loginWithGoogle(): void;
+  logout(): Promise<void>;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export function useAuth() {
   const context = useContext(AuthContext);
-  if (!context) {
-    throw new Error('useAuth must be used within an AuthProvider');
-  }
+  if (!context) throw new Error('useAuth must be used within AuthProvider');
   return context;
 }
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
-  const [currentUser, setCurrentUser] = useState<User | null>(null);
-  const [loading, setLoading] = useState(true);
+  const [currentUser, setCurrentUser] = useState<{ email: string } | null>(null);
 
   async function signup(email: string, password: string) {
-    await createUserWithEmailAndPassword(auth, email, password);
+    const res = await axios.post('http://localhost:3001/api/auth/signup', { email, password }, { withCredentials: true });
+    setCurrentUser(res.data.user);
   }
 
   async function login(email: string, password: string) {
-    await signInWithEmailAndPassword(auth, email, password);
+    const res = await axios.post('http://localhost:3001/api/auth/login', { email, password }, { withCredentials: true });
+    setCurrentUser(res.data.user);
   }
 
-  async function loginWithGoogle() {
-    await signInWithPopup(auth, googleProvider);
+  function loginWithGoogle() {
+    window.location.href = 'http://localhost:3001/api/auth/google';
   }
 
   async function logout() {
-    await signOut(auth);
+    await axios.post('http://localhost:3001/api/auth/logout', {}, { withCredentials: true });
+    setCurrentUser(null);
   }
 
-  useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
-      setCurrentUser(user);
-      setLoading(false);
-    });
-
-    return unsubscribe;
-  }, []);
-
-  const value = {
-    currentUser,
-    login,
-    signup,
-    loginWithGoogle,
-    logout,
-    loading
-  };
-
   return (
-    <AuthContext.Provider value={value}>
-      {!loading && children}
+    <AuthContext.Provider value={{ currentUser, signup, login, loginWithGoogle, logout }}>
+      {children}
     </AuthContext.Provider>
   );
 }
