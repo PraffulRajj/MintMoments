@@ -248,7 +248,7 @@ export default NewComponent;
 - 🔄 Access control for minting and updates
 - 🔄 Deploy to Polygon Mumbai testnet
 
-### **Backend Developer**  (ANKIT KUAMR)
+### **Backend Developer**  (ANKIT KUMAR)
 - 🔄 Express.js API server
 - 🔄 Dynamic metadata endpoints
 - 🔄 QR session management
