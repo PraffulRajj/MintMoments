@@ -5,34 +5,46 @@ import express from "express";
 import mongoose from "mongoose";
 import cors from "cors";
 import session from "express-session";
+import cookieParser from "cookie-parser";
 import passport from "passport";
 import authRoutes from "./routes/auth.js";
 
 const app = express();
 
-// Allowed origins (frontend URLs)
+// In production (Render) we’re behind a proxy; required for secure cookies
+if (process.env.NODE_ENV === "production") {
+  app.set("trust proxy", 1);
+}
+
+// Allowed frontend origins
 const allowedOrigins = [
-  "http://localhost:5173",              // local dev
-  "https://mintmoments.netlify.app"     // production frontend
+  "http://localhost:5173",
+  "https://mintmoments.netlify.app",
 ];
 
+// CORS (credentials + explicit origins)
 app.use(
   cors({
-    origin: allowedOrigins,
+    origin(origin, cb) {
+      // allow non-browser tools (no origin) and our whitelisted origins
+      if (!origin || allowedOrigins.includes(origin)) return cb(null, true);
+      return cb(new Error("Not allowed by CORS"));
+    },
     credentials: true,
   })
 );
 
 app.use(express.json());
+app.use(cookieParser());
 
-// Session config (works in dev + prod)
+// Session (only used by passport, we auth clients with our JWT cookie)
 app.use(
   session({
     secret: process.env.SESSION_SECRET || "supersecret",
     resave: false,
     saveUninitialized: false,
     cookie: {
-      secure: process.env.NODE_ENV === "production", // true on Render (https)
+      secure: process.env.NODE_ENV === "production",
       sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
       maxAge: 1000 * 60 * 60 * 24 * 7, // 7 days
     },
@@ -42,7 +54,7 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 
-// Import passport AFTER dotenv + session
+// Load passport AFTER env + session
 (async () => {
   await import("./config/passport.js");
 
@@ -53,7 +65,7 @@ app.use(passport.session());
 
   app.use("/api/auth", authRoutes);
 
-  app.get("/", (req, res) => res.send("✅ API Running"));
+  app.get("/", (_req, res) => res.send("✅ API Running"));
 
   const PORT = process.env.PORT || 3001;
   app.listen(PORT, () =>
