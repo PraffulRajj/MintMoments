@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState } from 'react';
+import React, { createContext, useContext, useState, useEffect } from 'react';
 import axios from 'axios';
 
 interface User {
@@ -12,6 +12,7 @@ interface AuthContextType {
   login(email: string, password: string): Promise<void>;
   loginWithGoogle(): void;
   logout(): Promise<void>;
+  refreshUser(): Promise<void>;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -55,8 +56,22 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     setCurrentUser(null);
   }
 
+  async function refreshUser() {
+    try {
+      const res = await axios.get(`${API_BASE}/api/auth/me`, { withCredentials: true });
+      setCurrentUser(res.data.user);
+    } catch (err) {
+      setCurrentUser(null); // no valid session
+    }
+  }
+
+  // Run once on mount, so after Google redirect it fetches the logged in user
+  useEffect(() => {
+    refreshUser();
+  }, []);
+
   return (
-    <AuthContext.Provider value={{ currentUser, signup, login, loginWithGoogle, logout }}>
+    <AuthContext.Provider value={{ currentUser, signup, login, loginWithGoogle, logout, refreshUser }}>
       {children}
     </AuthContext.Provider>
   );
