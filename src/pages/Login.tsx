@@ -1,7 +1,23 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
-import { Mail, Lock, Chrome, Ticket } from 'lucide-react';
+import { Mail, Lock, Ticket } from 'lucide-react';
+import { FaGoogle } from 'react-icons/fa'; // Import Google Icon
+
+const quotes = [
+  {
+    text: 'Innovation starts with a single ticket.',
+    img: 'https://cometogether.network/wp-content/uploads/2022/12/1-7.png',
+  },
+  {
+    text: 'Build for impact.',
+    img: 'https://miro.medium.com/v2/resize:fit:1100/format:webp/1*g37CYwOky7vRU9Es9uOrdg.jpeg',
+  },
+  {
+    text: 'Set up your digital wallet',
+    img: 'https://miro.medium.com/v2/resize:fit:1100/format:webp/1*hzfQBtJCaVDEJzp959rdnA.jpeg',
+  },
+];
 
 export function Login() {
   const [email, setEmail] = useState('');
@@ -10,6 +26,14 @@ export function Login() {
   const [loading, setLoading] = useState(false);
   const { login, loginWithGoogle } = useAuth();
   const navigate = useNavigate();
+  const [quoteIndex, setQuoteIndex] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setQuoteIndex((prevIndex) => (prevIndex + 1) % quotes.length);
+    }, 6000);
+    return () => clearInterval(interval);
+  }, []);
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -18,10 +42,11 @@ export function Login() {
       setLoading(true);
       await login(email, password);
       navigate('/dashboard');
-    } catch (error) {
+    } catch {
       setError('Failed to log in. Please check your credentials.');
+    } finally {
+      setLoading(false);
     }
-    setLoading(false);
   }
 
   async function handleGoogleSignIn() {
@@ -30,41 +55,90 @@ export function Login() {
       setLoading(true);
       await loginWithGoogle();
       navigate('/dashboard');
-    } catch (error) {
+    } catch {
       setError('Failed to sign in with Google.');
+    } finally {
+      setLoading(false);
     }
-    setLoading(false);
   }
 
+  // Color constants
+  const mintGreen = '#98FF98'; // Mint green for "Welcome Back"
+  const paleSpringBud = '#b6f1c4'; // Pale spring bud for the rest
+
   return (
-    <div className="min-h-screen bg-primary flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-md w-full space-y-8">
-        {/* Header */}
-        <div className="text-center">
-          <div className="flex justify-center">
-            <Ticket className="h-12 w-12 text-accent" />
+    <div
+      className="min-h-screen flex items-center justify-center bg-cover bg-center px-4 py-8"
+      style={{
+        backgroundImage:
+          "url('https://media.istockphoto.com/id/1376238514/vector/vector-illustrarion-green-technology-cyber-background.jpg?s=612x612&w=0&k=20&c=zxVu6xqskbL23VTMvv_L0-SC5vdvlTVpqN_OSLtcwWg=')",
+      }}
+    >
+      <div className="max-w-6xl w-full bg-white/5 backdrop-blur-md rounded-3xl shadow-xl flex overflow-hidden flex-col md:flex-row">
+        {/* Left Image + Quote */}
+        <div
+          className="w-full md:w-1/2 relative overflow-hidden rounded-t-3xl md:rounded-l-3xl md:rounded-tr-none"
+          style={{ minHeight: '480px' }}
+        >
+          <img
+            src={quotes[quoteIndex].img}
+            alt="Hackathon theme"
+            className="absolute inset-0 w-full h-full object-cover"
+          />
+          <div className="absolute inset-0 bg-black/40 flex flex-col justify-center items-center p-8 text-white">
+            <p
+              className="text-lg font-semibold text-center max-w-xs md:max-w-md italic"
+              style={{
+                fontStyle: 'italic',
+                fontSize: '1.25rem',
+                color: 'white',
+                textShadow: '0px 0px 10px rgba(255, 255, 255, 0.9), 0px 0px 20px rgba(255, 255, 255, 0.7)', // Glowing text
+              }}
+            >
+              &quot;{quotes[quoteIndex].text}&quot;
+            </p>
           </div>
-          <h2 className="mt-6 text-3xl font-bold text-white">
-            Welcome Back
-          </h2>
-          <p className="mt-2 text-sm text-gray-300">
-            Sign in to your MintMoments account
-          </p>
         </div>
 
-        {/* Form */}
-        <div className="glass-card rounded-2xl p-8">
-          {error && (
-            <div className="mb-4 p-3 bg-red-500/20 border border-red-500/50 rounded-lg text-red-200 text-sm">
-              {error}
+        {/* Login Form */}
+        <div className="w-full md:w-1/2 p-10 flex flex-col justify-center">
+          <div className="text-center mb-8">
+            <div className="flex justify-center mb-3">
+              <Ticket className="h-10 w-10 text-accent" />
             </div>
-          )}
+            <h2
+              className="text-3xl font-bold"
+              style={{
+                color: mintGreen,
+                textShadow: '0px 0px 8px rgba(0, 255, 0, 0.6), 0px 0px 20px rgba(0, 255, 0, 0.4)', // Glow effect on header
+              }}
+            >
+              Welcome Back
+            </h2>
+            <p
+              className="text-sm mt-2"
+              style={{
+                color: paleSpringBud,
+                textShadow: '0px 0px 8px rgba(255, 255, 255, 0.6)', // Light glow on small text
+              }}
+            >
+              Sign in to your DynamicTickets account
+            </p>
+          </div>
 
-          <form className="space-y-6" onSubmit={handleSubmit}>
-            <div>
-              <label htmlFor="email" className="sr-only">Email address</label>
+          <div className="bg-white/10 backdrop-blur-md p-8 rounded-2xl shadow-lg text-white">
+            {error && (
+              <div className="mb-4 p-3 bg-red-500/20 border border-red-500/50 rounded-lg text-red-300 text-sm">
+                {error}
+              </div>
+            )}
+
+            <form className="space-y-6" onSubmit={handleSubmit}>
+              {/* Email */}
               <div className="relative">
-                <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400" />
+                <div className="absolute inset-y-0 left-0 flex items-center pl-3">
+                  <Mail className="h-5 w-5" style={{ color: paleSpringBud }} />
+                </div>
                 <input
                   id="email"
                   name="email"
@@ -72,16 +146,16 @@ export function Login() {
                   required
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="input pl-10"
+                  className="w-full pl-12 pr-4 py-2 rounded-lg bg-white/90 text-black placeholder:text-gray-500 focus:outline-none focus:ring-2 focus:ring-accent"
                   placeholder="Email address"
                 />
               </div>
-            </div>
 
-            <div>
-              <label htmlFor="password" className="sr-only">Password</label>
+              {/* Password */}
               <div className="relative">
-                <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400" />
+                <div className="absolute inset-y-0 left-0 flex items-center pl-3">
+                  <Lock className="h-5 w-5" style={{ color: paleSpringBud }} />
+                </div>
                 <input
                   id="password"
                   name="password"
@@ -89,50 +163,48 @@ export function Login() {
                   required
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  className="input pl-10"
+                  className="w-full pl-12 pr-4 py-2 rounded-lg bg-white/90 text-black placeholder:text-gray-500 focus:outline-none focus:ring-2 focus:ring-accent"
                   placeholder="Password"
                 />
               </div>
+
+              <button
+                type="submit"
+                disabled={loading}
+                className="w-full py-2 rounded-lg bg-accent text-white font-semibold hover:bg-accent-dark transition disabled:opacity-50"
+              >
+                {loading ? 'Signing in...' : 'Sign In'}
+              </button>
+            </form>
+
+            {/* Divider */}
+            <div className="mt-6 flex items-center">
+              <div className="flex-grow border-t border-white/30"></div>
+              <span className="px-4 text-sm" style={{ color: paleSpringBud }}>
+                or
+              </span>
+              <div className="flex-grow border-t border-white/30"></div>
             </div>
 
+            {/* Google Sign In */}
             <button
-              type="submit"
+              onClick={handleGoogleSignIn}
               disabled={loading}
-              className="btn btn-primary w-full disabled:opacity-50"
+              className="mt-4 w-full py-2 rounded-lg bg-white/20 text-white font-semibold hover:bg-white/30 transition disabled:opacity-50"
             >
-              {loading ? 'Signing in...' : 'Sign In'}
+              {/* Google Icon */}
+              <FaGoogle className="h-5 w-5 inline-block mr-2" />
+              {loading ? 'Signing in with Google...' : 'Sign in with Google'}
             </button>
-          </form>
 
-          {/* Divider */}
-          <div className="mt-6">
-            <div className="relative">
-              <div className="absolute inset-0 flex items-center">
-                <div className="w-full border-t border-white/20" />
-              </div>
-              <div className="relative flex justify-center text-sm">
-                <span className="bg-primary px-2 text-gray-400">Or continue with</span>
-              </div>
-            </div>
+            {/* Sign up link */}
+            <p className="mt-6 text-center text-sm" style={{ color: paleSpringBud }}>
+              Don't have an account?{' '}
+              <Link to="/signup" className="hover:underline" style={{ color: paleSpringBud }}>
+                Sign up here
+              </Link>
+            </p>
           </div>
-
-          {/* Google Sign In */}
-          <button
-            onClick={handleGoogleSignIn}
-            disabled={loading}
-            className="mt-4 w-full btn btn-outline flex items-center justify-center gap-2 disabled:opacity-50"
-          >
-            <Chrome className="h-5 w-5" />
-            Sign in with Google
-          </button>
-
-          {/* Sign up link */}
-          <p className="mt-6 text-center text-sm text-gray-300">
-            Don't have an account?{' '}
-            <Link to="/signup" className="text-accent hover:underline">
-              Sign up here
-            </Link>
-          </p>
         </div>
       </div>
     </div>
