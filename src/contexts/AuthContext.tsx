@@ -1,9 +1,9 @@
-import React, { createContext, useContext, useState, useEffect } from 'react';
-import axios from 'axios';
+import React, { createContext, useContext, useState, useEffect } from "react";
+import axios from "axios";
 
 interface User {
   email: string;
-  displayName?: string; // optional
+  displayName?: string;
 }
 
 interface AuthContextType {
@@ -17,13 +17,13 @@ interface AuthContextType {
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
-// Use environment variable, fallback to localhost in dev
+// Netlify -> set VITE_API_URL = https://mintmoments.onrender.com
 const API_BASE = import.meta.env.VITE_API_URL || "http://localhost:3001";
 
 export function useAuth() {
-  const context = useContext(AuthContext);
-  if (!context) throw new Error('useAuth must be used within AuthProvider');
-  return context;
+  const ctx = useContext(AuthContext);
+  if (!ctx) throw new Error("useAuth must be used within AuthProvider");
+  return ctx;
 }
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
@@ -58,20 +58,23 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   async function refreshUser() {
     try {
-      const res = await axios.get(`${API_BASE}/api/auth/me`, { withCredentials: true });
+      const res = await axios.get(`${API_BASE}/api/auth/me`, {
+        withCredentials: true,
+      });
       setCurrentUser(res.data.user);
-    } catch (err) {
-      setCurrentUser(null); // no valid session
+    } catch {
+      setCurrentUser(null);
     }
   }
 
-  // Run once on mount, so after Google redirect it fetches the logged in user
   useEffect(() => {
     refreshUser();
   }, []);
 
   return (
-    <AuthContext.Provider value={{ currentUser, signup, login, loginWithGoogle, logout, refreshUser }}>
+    <AuthContext.Provider
+      value={{ currentUser, signup, login, loginWithGoogle, logout, refreshUser }}
+    >
       {children}
     </AuthContext.Provider>
   );
