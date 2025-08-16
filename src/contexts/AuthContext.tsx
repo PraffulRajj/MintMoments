@@ -1,8 +1,13 @@
 import React, { createContext, useContext, useState } from 'react';
 import axios from 'axios';
 
+interface User {
+  email: string;
+  displayName?: string; // optional
+}
+
 interface AuthContextType {
-  currentUser: { email: string } | null;
+  currentUser: User | null;
   signup(email: string, password: string): Promise<void>;
   login(email: string, password: string): Promise<void>;
   loginWithGoogle(): void;
@@ -18,15 +23,23 @@ export function useAuth() {
 }
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
-  const [currentUser, setCurrentUser] = useState<{ email: string } | null>(null);
+  const [currentUser, setCurrentUser] = useState<User | null>(null);
 
   async function signup(email: string, password: string) {
-    const res = await axios.post('http://localhost:3001/api/auth/signup', { email, password }, { withCredentials: true });
+    const res = await axios.post(
+      'http://localhost:3001/api/auth/signup',
+      { email, password },
+      { withCredentials: true }
+    );
     setCurrentUser(res.data.user);
   }
 
   async function login(email: string, password: string) {
-    const res = await axios.post('http://localhost:3001/api/auth/login', { email, password }, { withCredentials: true });
+    const res = await axios.post(
+      'http://localhost:3001/api/auth/login',
+      { email, password },
+      { withCredentials: true }
+    );
     setCurrentUser(res.data.user);
   }
 
