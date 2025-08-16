@@ -16,6 +16,9 @@ interface AuthContextType {
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
+// Use environment variable, fallback to localhost in dev
+const API_BASE = import.meta.env.VITE_API_URL || "http://localhost:3001";
+
 export function useAuth() {
   const context = useContext(AuthContext);
   if (!context) throw new Error('useAuth must be used within AuthProvider');
@@ -27,7 +30,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   async function signup(email: string, password: string) {
     const res = await axios.post(
-      'http://localhost:3001/api/auth/signup',
+      `${API_BASE}/api/auth/signup`,
       { email, password },
       { withCredentials: true }
     );
@@ -36,7 +39,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   async function login(email: string, password: string) {
     const res = await axios.post(
-      'http://localhost:3001/api/auth/login',
+      `${API_BASE}/api/auth/login`,
       { email, password },
       { withCredentials: true }
     );
@@ -44,11 +47,11 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   }
 
   function loginWithGoogle() {
-    window.location.href = 'http://localhost:3001/api/auth/google';
+    window.location.href = `${API_BASE}/api/auth/google`;
   }
 
   async function logout() {
-    await axios.post('http://localhost:3001/api/auth/logout', {}, { withCredentials: true });
+    await axios.post(`${API_BASE}/api/auth/logout`, {}, { withCredentials: true });
     setCurrentUser(null);
   }
 
