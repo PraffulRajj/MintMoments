@@ -79,7 +79,7 @@ export function Signup() {
       className="min-h-screen flex items-center justify-center bg-cover bg-center px-4 py-8"
       style={{
         backgroundImage:
-          "url('https://media.istockphoto.com/id/1376238514/vector/vector-illustrarion-green-technology-cyber-background.jpg?s=612x612&w=0&k=20&c=zxVu6xqskbL23VTMvv_L0-SC5vdvlTVpqN_OSLtcwWg=')",
+          "url('https://images.rawpixel.com/image_800/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIyLTA4L2pvYjEwNDgtYmFja2dyb3VuZC0wMi5qcGc.jpg')",
       }}
     >
       <div className="max-w-6xl w-full bg-white/5 backdrop-blur-md rounded-3xl shadow-xl flex overflow-hidden">

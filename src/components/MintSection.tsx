@@ -48,7 +48,7 @@ export default function MintSection() {
             </div>
             <div className="md:w-1/3 flex justify-center items-center animate__animated animate__fadeIn animate__delay-2s">
               <img
-                src="https://videos.openai.com/vg-assets/assets%2Ftask_01jz0m7y4tfjntqe84z1cz95et%2F1751294291_img_0.webp?st=2025-08-18T17%3A29%3A43Z&se=2025-08-24T18%3A29%3A43Z&sks=b&skt=2025-08-18T17%3A29%3A43Z&ske=2025-08-24T18%3A29%3A43Z&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skoid=aa5ddad1-c91a-4f0a-9aca-e20682cc8969&skv=2019-02-02&sv=2018-11-09&sr=b&sp=r&spr=https%2Chttp&sig=vdt4f85NkW7ot%2FVBq2PBKJhyvlfNjqT15OiE26NVf88%3D&az=oaivgprodscus"
+                src="https://videos.openai.com/vg-assets/assets%2Ftask_01jybwprk9e4tawg38jn6ctyhj%2F1750598538_img_1.webp?st=2025-09-14T19%3A30%3A56Z&se=2025-09-20T20%3A30%3A56Z&sks=b&skt=2025-09-14T19%3A30%3A56Z&ske=2025-09-20T20%3A30%3A56Z&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skoid=8ffff87a-01f1-47c9-9090-32999d4d6380&skv=2019-02-02&sv=2018-11-09&sr=b&sp=r&spr=https%2Chttp&sig=dLiBxk0a8o0zModuko%2BLW3BYcdH%2B7G%2B7SCqBFJzggjQ%3D&az=oaivgprodscus"
                 alt="NFT Ticket"
                 className="w-full h-full object-cover rounded-md"
                 style={{ aspectRatio: '1' }}  // Ensures the image is square
@@ -70,7 +70,7 @@ export default function MintSection() {
                 muted
                 playsInline
                 style={{ aspectRatio: '1' }} // Ensures video is square
-                src="https://videos.openai.com/vg-assets/assets%2Ftask_01jt0wyn3zfjy9aa9t6w4m8jc2%2Ftask_01jt0wyn3zfjy9aa9t6w4m8jc2_genid_30400a1a-0e84-41e9-842d-d28847009ed5_25_04_29_13_55_937875%2Fvideos%2F00000_412365910%2Fmd.mp4?st=2025-08-18T18%3A24%3A43Z&se=2025-08-24T19%3A24%3A43Z&sks=b&skt=2025-08-18T18%3A24%3A43Z&ske=2025-08-24T19%3A24%3A43Z&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skoid=aa5ddad1-c91a-4f0a-9aca-e20682cc8969&skv=2019-02-02&sv=2018-11-09&sr=b&sp=r&spr=https%2Chttp&sig=GJXlNMyJvw8lRYA2rJGrBUqUdN3cJWE%2FQDH6%2BbGcN7E%3D&az=oaivgprodscus"
+                src="https://videos.openai.com/vg-assets/assets%2Ftask_01jt0wyn3zfjy9aa9t6w4m8jc2%2Ftask_01jt0wyn3zfjy9aa9t6w4m8jc2_genid_30400a1a-0e84-41e9-842d-d28847009ed5_25_04_29_13_55_937875%2Fvideos%2F00000_412365910%2Fsource.mp4?st=2025-09-14T19%3A31%3A39Z&se=2025-09-20T20%3A31%3A39Z&sks=b&skt=2025-09-14T19%3A31%3A39Z&ske=2025-09-20T20%3A31%3A39Z&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skoid=8ffff87a-01f1-47c9-9090-32999d4d6380&skv=2019-02-02&sv=2018-11-09&sr=b&sp=r&spr=https%2Chttp&sig=RPh60UQQ%2BNHCAvRhliyZGEurrzhpv9ZITFnuvrD%2B9a8%3D&az=oaivgprodscus"
               />
             </div>
             <div className="md:w-2/3 text-white space-y-6 animate__animated animate__fadeIn animate__delay-2s">
@@ -113,7 +113,7 @@ export default function MintSection() {
                 muted
                 playsInline
                 style={{ aspectRatio: '1' }}  // Ensures video is square
-                src="https://videos.openai.com/vg-assets/assets%2Ftask_01jnpf3sk2fd9v0bkmta2wfhya%2Ftask_01jnpf3sk2fd9v0bkmta2wfhya_genid_b7ef53c6-fe56-479f-b025-c690ad9f1668_25_03_06_19_48_843624%2Fvideos%2F00000_468408655%2Fmd.mp4?st=2025-08-18T18%3A24%3A52Z&se=2025-08-24T19%3A24%3A52Z&sks=b&skt=2025-08-18T18%3A24%3A52Z&ske=2025-08-24T19%3A24%3A52Z&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skoid=aa5ddad1-c91a-4f0a-9aca-e20682cc8969&skv=2019-02-02&sv=2018-11-09&sr=b&sp=r&spr=https%2Chttp&sig=oxdLsRHcieoVQr5koly%2F8yy%2FVsqN2QHQx4JMUTrppZ8%3D&az=oaivgprodscus"
+                src="https://videos.openai.com/vg-assets/assets%2Ftask_01jnpf3sk2fd9v0bkmta2wfhya%2Ftask_01jnpf3sk2fd9v0bkmta2wfhya_genid_b7ef53c6-fe56-479f-b025-c690ad9f1668_25_03_06_19_48_843624%2Fvideos%2F00000_468408655%2Fsource.mp4?st=2025-09-14T19%3A32%3A26Z&se=2025-09-20T20%3A32%3A26Z&sks=b&skt=2025-09-14T19%3A32%3A26Z&ske=2025-09-20T20%3A32%3A26Z&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skoid=8ffff87a-01f1-47c9-9090-32999d4d6380&skv=2019-02-02&sv=2018-11-09&sr=b&sp=r&spr=https%2Chttp&sig=qMTAU9Bk4BtyT%2B%2FALMK8pKI9ZAG9n0lVMVDBpNmdMi8%3D&az=oaivgprodscus"
               />
             </div>
           </div>
